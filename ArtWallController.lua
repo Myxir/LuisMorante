@@ -43,7 +43,6 @@ function ArtWallController:lightCalculator(deviceIdSensor, deviceIdDimmer, limit
 end
 
 function ArtWallController:main()
-  print('----');
   artWallController = ArtWallController;
   artWallController:setIntervalVeryficationForSensor(100,10);
 
