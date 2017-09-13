@@ -1,6 +1,11 @@
 fibaro = require("Fibaro")
+
 ArtWallController = {};
 ArtWallController.__index = ArtWallController;
+
+sensor = 100;
+dimmer = 200;
+alarm = 300;
 
 function ArtWallController:setIntervalVeryficationForSensor(deviceId,values)
   fibaro.call(deviceId,'interval',values)
@@ -43,19 +48,17 @@ function ArtWallController:lightCalculator(deviceIdSensor, deviceIdDimmer, limit
 end
 
 function ArtWallController:main()
-  print('----');
   artWallController = ArtWallController;
-  artWallController:setIntervalVeryficationForSensor(100,10);
+  artWallController:setIntervalVeryficationForSensor(sensor,10);
 
-  local alarm = artWallController:getAlarmStatus(300);
+  local alarm = artWallController:getAlarmStatus(alarm);
   if(alarm == 0) then
 
-    local newPowerLight = artWallController:lightCalculator(100,200,100);
-    artWallController:setLightPowerForDimmer(200,newPowerLight)
-
+    local newPowerLight = artWallController:lightCalculator(sensor,dimmer,100);
+    artWallController:setLightPowerForDimmer(dimmer,newPowerLight)
   else
 
-    artWallController:setLightPowerForDimmer(200,0);
+    artWallController:setLightPowerForDimmer(dimmer,0);
 
   end
 end
